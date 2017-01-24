@@ -46,3 +46,16 @@ socket.on("message", function (data){
 	main.body(data.message);
 	main.bodyColor("blue");
 });
+
+main.on('click', 'down', function(e) {
+	send(user, "/list", false);
+});
+
+function send(user, message, data) {
+	console.log(message);
+	socket.emit("message", {
+		username: user,
+		message: message,
+		dataTransfer: data
+	});
+}
