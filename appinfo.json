@@ -39,11 +39,12 @@
     "sdkVersion": "3",
     "shortName": "bkmchat",
     "targetPlatforms": [
+        "aplite",
         "basalt"
     ],
     "uuid": "28641cb6-404e-4f27-bfb7-3a06b1a66095",
     "versionCode": 1,
-    "versionLabel": "1.0",
+    "versionLabel": "1.1",
     "watchapp": {
         "hiddenApp": false,
         "watchface": false

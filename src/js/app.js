@@ -46,10 +46,10 @@ socket.on("message", function (data){
 	main.subtitle(data.username);
 	main.body(data.message);
 	main.bodyColor("blue");
-	vibe.vibrate('short');
+	vibe.vibrate('long');
 });
 
-main.on('click', 'up', function(e) {
+main.on('click', 'select', function(e) {
 	var menu = new UI.Menu({
 		sections: [{
 			items: [{
@@ -108,6 +108,10 @@ main.on('click', 'up', function(e) {
 
 main.on('click', 'down', function(e) {
 	send(user, "/list", false);
+});
+
+main.on('click', 'up', function(e) {
+	socket.emit("user", {"username": user});
 });
 
 function send(user, message, data) {
