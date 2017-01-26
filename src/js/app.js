@@ -29,8 +29,9 @@ socket.on("connected", function (data) {
 });
 
 socket.on("disconnect", function () {
-	main.body("Disconnected! Reset the application to reconnect.");
+	main.body("Disconnected! Attempting reconnect...");
 	main.bodyColor("red");
+	socket.socket.reconnect();
 });
 
 socket.on("usernamereject", function () {
@@ -117,7 +118,13 @@ main.on('click', 'up', function(e) {
 			console.log('Error! ' + e.err);
 		}
 		
-		send(user, e.transcription, false);
+		if (e.transcription.length > 2) {
+			send(user, e.transcription, false);
+		} else {
+			main.subtitle("Pebble");
+			main.body("Cancelled voice.");
+		}
+		
 	});
 });
 
