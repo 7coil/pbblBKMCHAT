@@ -6,6 +6,7 @@
 
 var UI = require('ui');
 var vibe = require('ui/vibe');
+var voice = require('ui/voice');
 var io = require('socket.io');
 var socket = io.connect("http://node.infra.link/");
 var user = "pebble";
@@ -28,7 +29,7 @@ socket.on("connected", function (data) {
 });
 
 socket.on("disconnect", function () {
-	main.body("Disconnected!");
+	main.body("Disconnected! Reset the application to reconnect.");
 	main.bodyColor("red");
 });
 
@@ -111,7 +112,13 @@ main.on('click', 'down', function(e) {
 });
 
 main.on('click', 'up', function(e) {
-	socket.emit("user", {"username": user});
+	voice.dictate('start', true, function(e) {
+		if (e.err) {
+			console.log('Error! ' + e.err);
+		}
+		
+		send(user, e.transcription, false);
+	});
 });
 
 function send(user, message, data) {
