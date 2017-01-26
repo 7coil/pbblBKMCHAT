@@ -118,7 +118,7 @@ main.on('click', 'up', function(e) {
 			console.log('Error! ' + e.err);
 		}
 		
-		if (e.transcription.length > 2) {
+		if (e.transcription.length >= 2) {
 			send(user, e.transcription, false);
 		} else {
 			main.subtitle("Pebble");
